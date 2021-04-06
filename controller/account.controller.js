@@ -243,23 +243,18 @@ module.exports={
     // get thông tin các nhóm mà user đó tham gia
     group_user: async(req,res)=>{
        try {
-            let {id_account}=req.body;
-            try {
-                let sql=`SELECT ground.name, ground.id FROM ground, member_ground WHERE ground.id = member_ground.id_ground AND member_ground.id_account = ${id_account}`;
+            let {id}=req.body;
+                let sql=`SELECT ground.name, ground.id FROM ground, member_ground WHERE ground.id = member_ground.id_ground AND member_ground.id_account = ${id}`;
                 let data= await db._query(sql);
                 res.status(200).json({
                     message:"get data group user successfully",
                     data:data
                 })
-            } catch (error) {
-                res.status(500).json({
-                    message:error.message
-                })
-            }
+          
        } catch (error) {
-        res.status(500).json({
-            message:error.message
-        })
+            res.status(500).json({
+                message:error.message
+            })
        }
     },
     // get các công việc user và group
